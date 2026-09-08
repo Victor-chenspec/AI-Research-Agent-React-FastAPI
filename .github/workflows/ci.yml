@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build backend
+        run: docker build -t research-backend ./backend
+
+      - name: Build frontend
+        run: docker build -t research-frontend ./frontend
+
+      - name: Validate docker compose
+        run: docker compose config
+
+      - name: Run backend
+        run: |
+          docker run -d \
+          --name research-backend \
+          -p 8000:8000 \
+          research-backend
+
+      - name: Health check
+        run: |
+          sleep 5
+          curl -f http://localhost:8000/health
