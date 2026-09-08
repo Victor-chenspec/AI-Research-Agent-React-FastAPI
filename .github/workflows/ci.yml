@@ -22,12 +22,3 @@ jobs:
 
       - name: Build frontend
         run: docker build -t research-frontend ./frontend
-
-      - name: Run backend
-        run: |
-          docker run -d \
-            --name research-backend \
-            -p 8000:8000 \
-            -e GOOGLE_API_KEY="${{ secrets.GOOGLE_API_KEY }}" \
-            -e TAVILY_API_KEY="${{ secrets.TAVILY_API_KEY }}" \
-            research-backend
