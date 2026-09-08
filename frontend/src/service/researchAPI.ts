@@ -1,7 +1,7 @@
 import { type researchResponse } from "../types/research";
 
 export async function researchTopic(query: string): Promise<researchResponse> {
-  const response = await fetch("http://127.0.0.1:8000/research", {
+  const response = await fetch("/research/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
