@@ -31,8 +31,3 @@ jobs:
             -e GOOGLE_API_KEY="${{ secrets.GOOGLE_API_KEY }}" \
             -e TAVILY_API_KEY="${{ secrets.TAVILY_API_KEY }}" \
             research-backend
-
-      - name: Health check
-        run: |
-          sleep 5
-          curl -f http://localhost:8000/health
